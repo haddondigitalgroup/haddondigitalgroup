@@ -36,11 +36,10 @@ export default function CookieConsent() {
     >
       <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <p className="text-white/90 text-sm">
-          We use cookies and similar technologies to run the site and improve your experience. By continuing, you agree to our use of cookies. See our{" "}
+          We use cookies to run the site. By continuing you agree.{" "}
           <Link href="/privacy" className="text-white underline hover:no-underline">
-            Privacy Policy
-          </Link>{" "}
-          for how we handle your data under UK GDPR.
+            Privacy
+          </Link>
         </p>
         <button
           type="button"

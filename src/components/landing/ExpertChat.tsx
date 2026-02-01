@@ -4,8 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { MessageCircle, X, Send } from "lucide-react";
 
-const INITIAL_MESSAGE =
-  "Hey! Ready to level up your digital presence? ⚡️ I can walk you through our packages or explain how we handle your UK hosting and social reach. Just drop a question below and I'll get you sorted!";
+const INITIAL_MESSAGE = "Ask about our packages, hosting, or support.";
 
 const KNOWLEDGE: { keywords: string[]; answer: string }[] = [
   {
@@ -30,41 +29,13 @@ const KNOWLEDGE: { keywords: string[]; answer: string }[] = [
   },
 ];
 
-const LEAD_PROMPT =
-  "I'll get a human expert to look at that for you. What's your best contact number or email?";
-
-const QUICK_ACTIONS = [
-  {
-    id: "packages",
-    label: "💰 View Packages",
-    reply:
-      "**Basic (Essential)** is £449 setup + £14.99/month support—one powerful page, Client Portal, UK hosting, SEO. **Advanced** is £699 setup + £19.99/month—multi-page site, priority support, same hosting. Both include our Haddon Hub for updates. Want the full comparison or a discovery call?",
-  },
-  {
-    id: "hosting",
-    label: "🌍 UK Hosting Info",
-    reply:
-      "Every package includes **UK-based high-speed hosting**. That means faster load times for your UK visitors and better **local SEO**—search engines favour sites that serve users quickly from nearby servers. No extra cost, no separate setup.",
-  },
-  {
-    id: "social",
-    label: "📱 Social Media Reach",
-    reply:
-      "We link your site to **TikTok, Instagram, LinkedIn, and Facebook** as standard so your audience can find you everywhere. We can also add Google Business Profile and Trustpilot for maximum reach.",
-  },
-  {
-    id: "discovery",
-    label: "🤝 Book a Discovery Call",
-    reply: "discovery_call",
-  },
-] as const;
+const LEAD_PROMPT = "What's your best email or phone?";
 
 type Message = { role: "user" | "bot"; text: string };
 type Phase = "chat" | "lead_capture" | "lead_sent" | "discovery_call";
 
 export default function ExpertChat() {
   const [open, setOpen] = useState(false);
-  const [tooltipVisible, setTooltipVisible] = useState(true);
   const [messages, setMessages] = useState<Message[]>([{ role: "bot", text: INITIAL_MESSAGE }]);
   const [input, setInput] = useState("");
   const [phase, setPhase] = useState<Phase>("chat");
@@ -77,23 +48,13 @@ export default function ExpertChat() {
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const showQuickActions = messages.length === 1 && messages[0].role === "bot" && phase === "chat";
-
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
   useEffect(() => {
-    if (open) {
-      setTooltipVisible(false);
-      inputRef.current?.focus();
-    }
+    if (open) inputRef.current?.focus();
   }, [open]);
-
-  useEffect(() => {
-    const t = setTimeout(() => setTooltipVisible(false), 5000);
-    return () => clearTimeout(t);
-  }, []);
 
   function getReply(userText: string): string | null {
     const lower = userText.toLowerCase().trim();
@@ -120,6 +81,13 @@ export default function ExpertChat() {
       return;
     }
 
+    const lower = text.toLowerCase().trim();
+    if (lower.includes("discovery") || (lower.includes("book") && lower.includes("call"))) {
+      setPhase("discovery_call");
+      setMessages((m) => [...m, { role: "bot", text: "What's your email?" }]);
+      return;
+    }
+
     setPendingEnquiry(text);
     setPhase("lead_capture");
     setMessages((m) => [
@@ -141,36 +109,14 @@ export default function ExpertChat() {
         setLeadSent(true);
         setPhase("lead_sent");
         setContactInput("");
-        setMessages((m) => [
-          ...m,
-          { role: "bot", text: "Thanks! A human expert will be in touch soon." },
-        ]);
+        setMessages((m) => [...m, { role: "bot", text: "Thanks. We'll be in touch." }]);
       } else {
-        setMessages((m) => [
-          ...m,
-          { role: "bot", text: "Something went wrong. Please try again or email us directly." },
-        ]);
+        setMessages((m) => [...m, { role: "bot", text: "Something went wrong. Try again or email us." }]);
       }
     } catch {
-      setMessages((m) => [
-        ...m,
-        { role: "bot", text: "Something went wrong. Please try again or email us directly." },
-      ]);
+      setMessages((m) => [...m, { role: "bot", text: "Something went wrong. Try again or email us." }]);
     } finally {
       setSending(false);
-    }
-  }
-
-  function handleQuickAction(action: (typeof QUICK_ACTIONS)[number]) {
-    setMessages((m) => [...m, { role: "user", text: action.label }]);
-    if (action.reply === "discovery_call") {
-      setPhase("discovery_call");
-      setMessages((m) => [
-        ...m,
-        { role: "bot", text: "Nice! What's your best email and we'll get a discovery call in the diary?" },
-      ]);
-    } else {
-      setMessages((m) => [...m, { role: "bot", text: action.reply }]);
     }
   }
 
@@ -186,21 +132,12 @@ export default function ExpertChat() {
       if (res.ok) {
         setPhase("lead_sent");
         setDiscoveryEmail("");
-        setMessages((m) => [
-          ...m,
-          { role: "bot", text: "Thanks! We'll be in touch to book your discovery call." },
-        ]);
+        setMessages((m) => [...m, { role: "bot", text: "Thanks. We'll be in touch." }]);
       } else {
-        setMessages((m) => [
-          ...m,
-          { role: "bot", text: "Something went wrong. Please try again or email us directly." },
-        ]);
+        setMessages((m) => [...m, { role: "bot", text: "Something went wrong. Try again or email us." }]);
       }
     } catch {
-      setMessages((m) => [
-        ...m,
-        { role: "bot", text: "Something went wrong. Please try again or email us directly." },
-      ]);
+      setMessages((m) => [...m, { role: "bot", text: "Something went wrong. Try again or email us." }]);
     } finally {
       setDiscoverySending(false);
     }
@@ -208,7 +145,7 @@ export default function ExpertChat() {
 
   return (
     <>
-      {/* FAB + tooltip */}
+      {/* FAB */}
       <motion.div
         className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-2"
         initial={{ opacity: 0, y: 20, scale: 0.8 }}
@@ -220,18 +157,6 @@ export default function ExpertChat() {
           delay: 0.3,
         }}
       >
-        <AnimatePresence>
-          {tooltipVisible && !open && (
-            <motion.div
-              initial={{ opacity: 0, x: 8 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: 8 }}
-              className="rounded-lg bg-neutral-700/90 border border-neutral-500 text-neutral-100 text-sm font-medium px-3 py-2 shadow-lg whitespace-nowrap"
-            >
-              Ask one of our experts.
-            </motion.div>
-          )}
-        </AnimatePresence>
         <motion.button
           type="button"
           onClick={() => setOpen((o) => !o)}
@@ -274,8 +199,7 @@ export default function ExpertChat() {
               {/* Header */}
               <div className="flex items-center justify-between shrink-0 px-4 py-3 border-b border-neutral-500/50 bg-neutral-700/80 backdrop-blur-md">
                 <div>
-                  <h3 className="font-bold text-white text-base">HaddonDigitalGroup Expert Support</h3>
-                  <p className="text-white/70 text-xs mt-0.5">Online | Typically responds in minutes</p>
+                  <h3 className="font-bold text-white text-base">Support</h3>
                 </div>
                 <button
                   type="button"
@@ -301,22 +225,7 @@ export default function ExpertChat() {
                           : "glass border border-white/10 text-white/90"
                       }`}
                     >
-                      {msg.role === "bot" && i === 0 ? (
-                        <p className="leading-relaxed">
-                          Hey! Ready to level up your digital presence?{" "}
-                          <motion.span
-                            className="inline-block"
-                            animate={{ opacity: [1, 0.6, 1], scale: [1, 1.1, 1] }}
-                            transition={{ duration: 1.5, repeat: Infinity, repeatDelay: 2 }}
-                            aria-hidden
-                          >
-                            ⚡️
-                          </motion.span>{" "}
-                          I can walk you through our packages or explain how we handle your UK
-                          hosting and social reach. Just drop a question below and I&apos;ll get you
-                          sorted!
-                        </p>
-                      ) : msg.role === "bot" ? (
+                      {msg.role === "bot" ? (
                         <p
                           className="leading-relaxed"
                           dangerouslySetInnerHTML={{ __html: formatBotMessage(msg.text) }}
@@ -327,22 +236,6 @@ export default function ExpertChat() {
                     </div>
                   </div>
                 ))}
-                {showQuickActions && (
-                  <div className="flex flex-col gap-2 pt-2">
-                    <p className="text-white/70 text-xs font-medium">Quick actions</p>
-                    {QUICK_ACTIONS.map((action) => (
-                      <motion.button
-                        key={action.id}
-                        type="button"
-                        onClick={() => handleQuickAction(action)}
-                        className="w-full min-h-[48px] sm:min-h-[44px] rounded-xl px-4 py-3 text-left text-sm font-medium text-white bg-emerald-600/90 border border-emerald-400/80 transition-colors focus:outline-none focus:ring-2 focus:ring-emerald-400 touch-manipulation"
-                        whileTap={{ scale: 0.98 }}
-                      >
-                        {action.label}
-                      </motion.button>
-                    ))}
-                  </div>
-                )}
                 <div ref={messagesEndRef} />
               </div>
 
