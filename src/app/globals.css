@@ -1,0 +1,24 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #0a0a0f;
+  --foreground: #fafafa;
+  --brand-red: #c41e3a;
+  --brand-red-dark: #9e1830;
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+}
+
+/* Glassmorphism utility */
+.glass {
+  @apply bg-white/5 backdrop-blur-md border border-white/10;
+}
+
+.glass-strong {
+  @apply bg-white/10 backdrop-blur-lg border border-white/15;
+}
