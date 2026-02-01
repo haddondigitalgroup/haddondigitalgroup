@@ -2,10 +2,10 @@ import Link from "next/link";
 import { Instagram, Facebook, Linkedin, ExternalLink } from "lucide-react";
 
 const social = [
-  { name: "Instagram", href: "https://instagram.com", Icon: Instagram },
-  { name: "TikTok", href: "https://tiktok.com", Icon: () => null },
-  { name: "LinkedIn", href: "https://linkedin.com", Icon: Linkedin },
-  { name: "Facebook", href: "https://facebook.com", Icon: Facebook },
+  { name: "Instagram", href: "https://www.instagram.com/haddondigitalgroup/", Icon: Instagram },
+  { name: "TikTok", href: "https://www.tiktok.com/@haddondigitalgroup", Icon: () => null },
+  { name: "LinkedIn", href: "https://www.linkedin.com/company/haddondigitalgroup/", Icon: Linkedin },
+  { name: "Facebook", href: "https://www.facebook.com/haddondigitalgroup", Icon: Facebook },
 ];
 
 export default function Footer() {

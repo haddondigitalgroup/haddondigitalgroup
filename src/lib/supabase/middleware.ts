@@ -9,7 +9,7 @@ export async function updateSession(request: NextRequest) {
     return NextResponse.next();
   }
 
-  let response = NextResponse.next({
+  const response = NextResponse.next({
     request: { headers: request.headers },
   });
 
@@ -18,7 +18,7 @@ export async function updateSession(request: NextRequest) {
       getAll() {
         return request.cookies.getAll();
       },
-      setAll(cookiesToSet) {
+      setAll(cookiesToSet: { name: string; value: string }[]) {
         cookiesToSet.forEach(({ name, value }) =>
           response.cookies.set(name, value)
         );

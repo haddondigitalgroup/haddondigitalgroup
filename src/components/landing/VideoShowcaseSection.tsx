@@ -81,7 +81,6 @@ function VideoTile({
   alt: string;
 }) {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const [isInView, setIsInView] = useState(false);
   const [hasVideo, setHasVideo] = useState(true);
 
   useEffect(() => {
@@ -91,7 +90,6 @@ function VideoTile({
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          setIsInView(entry.isIntersecting);
           if (entry.isIntersecting && el.paused) {
             el.play().catch(() => {});
           } else if (!entry.isIntersecting && !el.paused) {

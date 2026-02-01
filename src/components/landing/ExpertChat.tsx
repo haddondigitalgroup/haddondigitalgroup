@@ -9,9 +9,9 @@ const INITIAL_MESSAGE =
 
 const KNOWLEDGE: { keywords: string[]; answer: string }[] = [
   {
-    keywords: ["price", "pricing", "cost", "fee", "£499", "£699", "how much", "packages"],
+    keywords: ["price", "pricing", "cost", "fee", "£449", "£499", "£699", "how much", "packages"],
     answer:
-      "We have three main packages: **Essential** at £499 setup with £14.99/month support, **Advanced** at £699 setup with £19.99/month support, and **Professional** at £999 with £19.99/month support. Additional Services are a one-off £299. All include UK-based high-speed hosting.",
+      "We have three main packages: **Essential** at £449 setup with £14.99/month support, **Advanced** at £699 setup with £19.99/month support, and **Professional** at £999 with £19.99/month support. Additional Services are a one-off £299. All include UK-based high-speed hosting.",
   },
   {
     keywords: ["hosting", "host", "server", "uk hosting"],
@@ -38,7 +38,7 @@ const QUICK_ACTIONS = [
     id: "packages",
     label: "💰 View Packages",
     reply:
-      "**Basic (Essential)** is £499 setup + £14.99/month support—one powerful page, Client Portal, UK hosting, SEO. **Advanced** is £699 setup + £19.99/month—multi-page site, priority support, same hosting. Both include our Haddon Hub for updates. Want the full comparison or a discovery call?",
+      "**Basic (Essential)** is £449 setup + £14.99/month support—one powerful page, Client Portal, UK hosting, SEO. **Advanced** is £699 setup + £19.99/month—multi-page site, priority support, same hosting. Both include our Haddon Hub for updates. Want the full comparison or a discovery call?",
   },
   {
     id: "hosting",
@@ -313,7 +313,7 @@ export default function ExpertChat() {
                             ⚡️
                           </motion.span>{" "}
                           I can walk you through our packages or explain how we handle your UK
-                          hosting and social reach. Just drop a question below and I'll get you
+                          hosting and social reach. Just drop a question below and I&apos;ll get you
                           sorted!
                         </p>
                       ) : msg.role === "bot" ? (

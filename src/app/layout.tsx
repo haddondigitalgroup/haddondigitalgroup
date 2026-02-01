@@ -13,13 +13,13 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://haddondigital.co.uk";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.haddondigitalgroup.com";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  title: "HaddonDigitalGroup | Enterprise-Grade Technology for Local Business",
+  title: "HaddonDigitalGroup | Web Design & Digital Packages | Hinckley & Leicestershire",
   description:
-    "Essential, Advanced, and Professional website packages plus Additional Services for Hinckley & Leicestershire. From £499. Client Portal, UK hosting, e-commerce, abandoned cart recovery. All prices in £ (GBP).",
+    "Professional web design and digital packages in the UK. From £449. Contact us today for competitive rates.",
   keywords:
     "web design Hinckley, Essential package, Advanced package, Professional package, e-commerce, abandoned cart, Client Portal, Additional Services, UK hosting, digital agency, HaddonDigitalGroup, UK, Leicestershire, England",
   authors: [{ name: "HaddonDigitalGroup", url: siteUrl }],
@@ -27,32 +27,32 @@ export const metadata: Metadata = {
   publisher: "HaddonDigitalGroup",
   formatDetection: { telephone: true, email: true, address: true },
   openGraph: {
-    title: "HaddonDigitalGroup | Enterprise-Grade Technology for Local Business",
-    description:
-      "Essential, Advanced & Professional packages from £499. Client Portal, UK hosting, e-commerce, app included. Additional Services £299 one-off. Hinckley & Leicestershire.",
+    title: "HaddonDigitalGroup",
+    description: "Find us on Instagram, TikTok, LinkedIn, and Facebook. Web design & packages from £449.",
     type: "website",
-    url: "/",
+    url: siteUrl,
     siteName: "HaddonDigitalGroup",
     locale: "en_GB",
     countryName: "United Kingdom",
-    images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "HaddonDigitalGroup" }],
+    images: [{ url: `${siteUrl}/og-image.png`, width: 1200, height: 630, alt: "HaddonDigitalGroup" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "HaddonDigitalGroup | Enterprise-Grade Technology for Local Business",
-    description:
-      "Essential, Advanced & Professional from £499. Client Portal, UK hosting, e-commerce, app. Additional Services £299. Hinckley & Leicestershire.",
+    title: "HaddonDigitalGroup",
+    description: "Find us on Instagram, TikTok, LinkedIn, and Facebook. Web design & packages from £449.",
+    images: [{ url: `${siteUrl}/og-image.png`, width: 1200, height: 630, alt: "HaddonDigitalGroup" }],
   },
   icons: {
     icon: [{ url: "/favicon.ico", sizes: "any" }, { url: "/favicon.svg", type: "image/svg+xml" }],
   },
-  alternates: { canonical: "/" },
+  alternates: { canonical: `${siteUrl}/` },
   robots: { index: true, follow: true },
   other: {
     "geo.region": "GB",
     "geo.placename": "United Kingdom",
   },
 };
+
 
 export default function RootLayout({
   children,

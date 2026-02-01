@@ -39,7 +39,7 @@ const tiers: Tier[] = [
     id: "essential",
     name: "Essential",
     subtitle: "",
-    price: "£499",
+    price: "£449",
     monthlySupport: "£14.99",
     showYearlyOption: true,
     description:
