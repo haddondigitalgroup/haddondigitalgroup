@@ -5,9 +5,9 @@ export default function SiteHeader() {
     <header className="fixed top-0 left-0 right-0 z-30 glass border-b border-white/10">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-14 sm:h-16">
         <Link href="/" className="flex flex-col">
-          <span className="font-bold text-lg text-white tracking-tight">HaddonDigitalGroup</span>
+          <span className="font-bold text-lg text-white tracking-tight">Haddon Digital Group</span>
           <span className="text-white/70 text-xs font-medium uppercase tracking-wider">
-            Digital Design Agency
+            Digital Transformation Agency
           </span>
         </Link>
         <nav className="flex items-center gap-4 sm:gap-6" aria-label="Main navigation">

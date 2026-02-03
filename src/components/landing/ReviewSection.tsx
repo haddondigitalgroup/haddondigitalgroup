@@ -1,87 +1,61 @@
 "use client";
 
-import { Star, Quote } from "lucide-react";
-import { motion } from "framer-motion";
+import { useState } from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
-const reviews = [
+const testimonials = [
   {
-    name: "Sarah M.",
-    rating: 5,
-    text: "HaddonDigitalGroup built our café website and it's brought in so many new customers. Professional and a pleasure to work with.",
-  },
-  {
-    name: "James T.",
-    rating: 5,
-    text: "Our new site looks premium and we get enquiries every week. Worth every penny.",
-  },
-  {
-    name: "Lisa K.",
-    rating: 5,
-    text: "From design to launch, everything was smooth. Our garage has never looked so good online.",
+    quote:
+      "Haddon Digital Group delivered a premium digital presence that paid for itself within weeks. We now receive a consistent stream of high-value enquiries every single week.",
   },
 ];
 
-const container = {
-  hidden: { opacity: 0 },
-  show: {
-    opacity: 1,
-    transition: { staggerChildren: 0.1 },
-  },
-};
-
-const item = {
-  hidden: { opacity: 0, y: 20 },
-  show: { opacity: 1, y: 0 },
-};
-
 export default function ReviewSection() {
+  const [index, setIndex] = useState(0);
+  const t = testimonials[index];
+
   return (
     <section
       id="reviews"
-      className="py-10 sm:py-14 px-4 sm:px-6 lg:px-8 bg-[#0a0a0f]"
+      className="relative py-16 sm:py-20 px-4 sm:px-6 lg:px-8 bg-[#0a0a0f]"
       aria-labelledby="reviews-heading"
     >
-      <div className="max-w-6xl mx-auto">
+      <div className="max-w-4xl mx-auto text-center">
         <h2
           id="reviews-heading"
-          className="text-4xl sm:text-5xl md:text-6xl font-bold text-white tracking-tight mb-2 text-center"
+          className="sr-only"
         >
-          Shared by our community
+          What our clients say
         </h2>
-        <p className="text-white/70 text-center mb-8">
-          What local businesses say about working with us
-        </p>
-
-        <motion.div
-          variants={container}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, margin: "-50px" }}
-          className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
-        >
-          {reviews.map((review, i) => (
-            <motion.article
-              key={i}
-              variants={item}
-              className="glass rounded-xl p-6 border border-white/10 flex flex-col"
-            >
-              <div className="flex gap-1 mb-3" aria-label={`${review.rating} out of 5 stars`}>
-                {Array.from({ length: review.rating }).map((_, j) => (
-                  <Star
-                    key={j}
-                    className="w-5 h-5 fill-amber-400 text-amber-400"
-                    aria-hidden
-                  />
-                ))}
-              </div>
-              <Quote className="w-8 h-8 text-white/20 mb-2" aria-hidden />
-              <p className="text-white/90 flex-1">&ldquo;{review.text}&rdquo;</p>
-              <footer className="mt-4 pt-4 border-t border-white/10">
-                <p className="font-semibold text-white">{review.name}</p>
-              </footer>
-            </motion.article>
-          ))}
-        </motion.div>
+        <div className="relative">
+          <span
+            className="absolute -top-2 left-1/2 -translate-x-1/2 text-8xl sm:text-9xl font-serif text-white/20 select-none"
+            aria-hidden
+          >
+            99
+          </span>
+          <blockquote className="relative z-10 text-xl sm:text-2xl lg:text-3xl font-medium text-white leading-relaxed px-4">
+            &ldquo;{t.quote}&rdquo;
+          </blockquote>
+        </div>
+        <div className="mt-8 flex items-center justify-center gap-4" role="group" aria-label="Testimonial navigation">
+          <button
+            type="button"
+            onClick={() => setIndex((i) => (i === 0 ? testimonials.length - 1 : i - 1))}
+            className="flex h-12 w-12 items-center justify-center rounded-full border border-white/20 text-white/80 hover:text-white hover:bg-white/10 transition-colors focus:outline-none focus:ring-2 focus:ring-white/50"
+            aria-label="Previous testimonial"
+          >
+            <ChevronLeft className="w-6 h-6" aria-hidden />
+          </button>
+          <button
+            type="button"
+            onClick={() => setIndex((i) => (i === testimonials.length - 1 ? 0 : i + 1))}
+            className="flex h-12 w-12 items-center justify-center rounded-full border border-white/20 text-white/80 hover:text-white hover:bg-white/10 transition-colors focus:outline-none focus:ring-2 focus:ring-white/50"
+            aria-label="Next testimonial"
+          >
+            <ChevronRight className="w-6 h-6" aria-hidden />
+          </button>
+        </div>
       </div>
     </section>
   );

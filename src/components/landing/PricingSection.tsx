@@ -16,6 +16,7 @@ type TierBase = {
   description: string;
   features: string[];
   highlighted: boolean;
+  introductoryPrice?: boolean;
 };
 
 type TierWithSupport = TierBase & {
@@ -51,6 +52,7 @@ const tiers: Tier[] = [
       "SEO Meta Tags",
     ],
     highlighted: false,
+    introductoryPrice: true,
   },
   {
     type: "support",
@@ -76,7 +78,7 @@ const tiers: Tier[] = [
     name: "Professional",
     subtitle: "High-Traffic & Automation",
     price: "£999",
-    monthlySupport: "£19.99",
+    monthlySupport: "£29.00",
     showYearlyOption: false,
     description:
       "High-performance digital ecosystem for established businesses. Bespoke functionality and elite styling.",
@@ -91,15 +93,17 @@ const tiers: Tier[] = [
   {
     type: "one-off",
     id: "additional-services",
-    name: "Additional Services",
-    subtitle: "",
+    name: "Custom iOS & Android App",
+    subtitle: "Mobile App",
     price: "£299",
-    priceSubtext: "One-off fee · No monthly fee",
-    description: "Add-on services to extend your site or app. One-time fee, no ongoing commitment.",
+    priceSubtext: "One-off build fee · Optional support from £29.99/mo",
+    description:
+      "A branded mobile app for your business. Native iOS and Android apps so your customers can reach you on the go.",
     features: [
-      "Bespoke integrations and enhancements",
-      "Extra pages or functionality",
-      "Consultation and strategy",
+      "Native iOS and Android app",
+      "Branded app for your business",
+      "App Store & Play Store listing support",
+      "Optional ongoing support (£29.99/mo)",
     ],
     highlighted: false,
   },
@@ -148,7 +152,7 @@ export default function PricingSection() {
           Packages that scale with you
         </h2>
         <p className="text-white/70 text-center mb-6">
-          One-off build fee + optional support. All prices in GBP (£).
+          One-off build fee + optional support. All prices in GBP (£). Pay by card or PayPal at checkout.
         </p>
 
         <div className="flex items-center justify-center gap-3 mb-8">
@@ -194,6 +198,11 @@ export default function PricingSection() {
                   : "glass border border-white/10"
               }`}
             >
+              {tier.introductoryPrice && (
+                <div className="absolute -top-3 left-4 rounded-full bg-white/20 px-3 py-1 text-xs font-medium text-black">
+                  Introductory price
+                </div>
+              )}
               {tier.highlighted && (
                 <div className="absolute -top-3 left-1/2 -translate-x-1/2 flex items-center gap-1 rounded-full bg-white/10 px-3 py-1 text-xs font-medium text-white">
                   <Sparkles className="w-3.5 h-3.5" aria-hidden />

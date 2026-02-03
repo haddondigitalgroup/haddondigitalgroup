@@ -144,7 +144,7 @@ export default function VideoShowcaseSection() {
   return (
     <section
       id="video-showcase"
-      className="py-10 sm:py-14 px-4 sm:px-6 lg:px-8 bg-[#0d0d14] border-t border-white/5"
+      className="pt-20 sm:pt-24 pb-10 sm:pb-14 px-4 sm:px-6 lg:px-8 bg-[#0d0d14]"
       aria-labelledby="video-showcase-heading"
     >
       <div className="max-w-6xl mx-auto">
