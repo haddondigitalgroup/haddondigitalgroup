@@ -1,15 +1,15 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import CookieConsent from "@/components/landing/CookieConsent";
 import WhatsAppFAB from "@/components/landing/WhatsAppFAB";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const inter = Inter({
+  variable: "--font-sans",
   subsets: ["latin"],
 });
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const jetbrainsMono = JetBrains_Mono({
+  variable: "--font-mono",
   subsets: ["latin"],
 });
 
@@ -62,7 +62,7 @@ export default function RootLayout({
   return (
     <html lang="en-GB" className="dark">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen bg-[#0a0a0f] text-white font-sans`}
+        className={`${inter.variable} ${jetbrainsMono.variable} antialiased min-h-screen bg-[#0a0a0f] text-white font-sans`}
       >
         {children}
         <CookieConsent />
