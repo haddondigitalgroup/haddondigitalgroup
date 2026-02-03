@@ -1,5 +1,7 @@
 "use client";
 
+import Link from "next/link";
+
 export default function GlobalError({
   error,
   reset,
@@ -7,6 +9,7 @@ export default function GlobalError({
   error: Error & { digest?: string };
   reset: () => void;
 }) {
+  if (typeof window !== "undefined") console.error(error);
   return (
     <html lang="en-GB">
       <body className="antialiased min-h-screen bg-[#0a0a0f] text-white flex flex-col items-center justify-center px-4 font-sans">
@@ -21,12 +24,12 @@ export default function GlobalError({
         >
           Try again
         </button>
-        <a
+        <Link
           href="/"
           className="mt-4 text-white/70 hover:text-white text-sm underline"
         >
           Back to home
-        </a>
+        </Link>
       </body>
     </html>
   );
