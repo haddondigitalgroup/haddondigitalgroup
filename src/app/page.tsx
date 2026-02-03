@@ -1,3 +1,4 @@
+import HeroSection from "@/components/landing/HeroSection";
 import ReviewSection from "@/components/landing/ReviewSection";
 import VideoShowcaseSection from "@/components/landing/VideoShowcaseSection";
 import PricingSection from "@/components/landing/PricingSection";
@@ -10,6 +11,7 @@ export default function Home() {
     <>
       <SiteHeader />
       <main className="overflow-x-hidden">
+        <HeroSection />
         <VideoShowcaseSection />
         <PricingSection />
         <ReviewSection />

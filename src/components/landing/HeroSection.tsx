@@ -18,7 +18,7 @@ export default function HeroSection() {
           playsInline
           className="absolute inset-0 w-full h-full object-cover"
           poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1920 1080'%3E%3Crect fill='%230a0a0f' width='1920' height='1080'/%3E%3C/svg%3E"
-          title="Background video: HaddonDigitalGroup brand"
+          title="Background video: Haddon Digital Group brand"
           aria-label="Decorative background video"
         >
           <source src={HERO_VIDEO_SRC} type="video/mp4" />
@@ -41,7 +41,7 @@ export default function HeroSection() {
             Empowering local business.
           </p>
           <p className="mt-4 sm:mt-6 text-white/80 text-sm sm:text-base max-w-2xl mx-auto">
-            Delivering high-end technology solutions to local enterprises. HaddonDigitalGroup specialise
+            Delivering high-end technology solutions to local enterprises. Haddon Digital Group specialise
             in high-performance web development and AI business automation designed to help small
             businesses scale and reach their potential.
           </p>
