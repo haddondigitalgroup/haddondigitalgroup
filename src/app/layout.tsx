@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import CookieConsent from "@/components/landing/CookieConsent";
-import ExpertChat from "@/components/landing/ExpertChat";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -17,33 +16,36 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.haddondigitalgr
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  title: "HaddonDigitalGroup | Web Design & Digital Packages | Hinckley & Leicestershire",
+  title: "Haddon Digital Group | Digital Transformation Agency",
   description:
-    "Professional web design and digital packages in the UK. From £449. Contact us today for competitive rates.",
+    "Web Developer in Leicestershire and UK Digital Agency. Professional web design and digital packages from £449.00. Contact us today for competitive rates.",
   keywords:
-    "web design Hinckley, Essential package, Advanced package, Professional package, e-commerce, abandoned cart, Client Portal, Additional Services, UK hosting, digital agency, HaddonDigitalGroup, UK, Leicestershire, England",
-  authors: [{ name: "HaddonDigitalGroup", url: siteUrl }],
-  creator: "HaddonDigitalGroup",
-  publisher: "HaddonDigitalGroup",
+    "Web Developer in Leicestershire, UK Digital Agency, web design Hinckley, Essential package, Advanced package, Professional package, Custom iOS Android app, Mobile app, e-commerce, Client Portal, UK hosting, Haddon Digital Group, Leicestershire, England",
+  authors: [{ name: "Haddon Digital Group", url: siteUrl }],
+  creator: "Haddon Digital Group",
+  publisher: "Haddon Digital Group",
   formatDetection: { telephone: true, email: true, address: true },
   openGraph: {
-    title: "HaddonDigitalGroup",
-    description: "Find us on Instagram, TikTok, LinkedIn, and Facebook. Web design & packages from £449.",
+    title: "Haddon Digital Group | Digital Transformation Agency",
+    description:
+      "Web Developer in Leicestershire and UK Digital Agency. Professional web design and digital packages from £449.00. Find us on Instagram, TikTok, LinkedIn and Facebook.",
     type: "website",
     url: siteUrl,
-    siteName: "HaddonDigitalGroup",
+    siteName: "Haddon Digital Group",
     locale: "en_GB",
     countryName: "United Kingdom",
-    images: [{ url: `${siteUrl}/og-image.png`, width: 1200, height: 630, alt: "HaddonDigitalGroup" }],
+    images: [{ url: `${siteUrl}/og-image.png`, width: 1200, height: 630, alt: "Haddon Digital Group" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "HaddonDigitalGroup",
-    description: "Find us on Instagram, TikTok, LinkedIn, and Facebook. Web design & packages from £449.",
-    images: [{ url: `${siteUrl}/og-image.png`, width: 1200, height: 630, alt: "HaddonDigitalGroup" }],
+    title: "Haddon Digital Group | Digital Transformation Agency",
+    description:
+      "Web Developer in Leicestershire and UK Digital Agency. Professional web design and digital packages from £449.00. Find us on Instagram, TikTok, LinkedIn and Facebook.",
+    images: [{ url: `${siteUrl}/og-image.png`, width: 1200, height: 630, alt: "Haddon Digital Group" }],
   },
   icons: {
     icon: [{ url: "/favicon.svg", type: "image/svg+xml" }],
+    apple: [{ url: "/favicon.svg", type: "image/svg+xml" }],
   },
   alternates: { canonical: `${siteUrl}/` },
   robots: { index: true, follow: true },
@@ -53,7 +55,6 @@ export const metadata: Metadata = {
   },
 };
 
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -62,11 +63,10 @@ export default function RootLayout({
   return (
     <html lang="en-GB" className="dark">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen bg-[#0a0a0f] text-white font-sans`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen bg-[#0a0a0f] text-white font-sans overflow-x-hidden`}
       >
         {children}
         <CookieConsent />
-        <ExpertChat />
       </body>
     </html>
   );
